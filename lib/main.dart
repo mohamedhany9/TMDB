@@ -6,7 +6,8 @@ import 'package:tmdb/data/repositories/person_repository_impl.dart';
 import 'package:tmdb/domain/usecases/get_persons.dart';
 import 'package:tmdb/presentation/screens/person_list_screen.dart';
 
-import 'presentation/providers/plant_provider.dart';
+import 'presentation/providers/person_provider.dart';
+
 
 void main() {
   final plantApiService = PersonApiService();
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         rebuildFactor: (old, data) => true,
         builder: (context, child) {
           return ChangeNotifierProvider(
-            create: (_) => PlantProvider(getPersonsUseCase),
+            create: (_) => PersonProvider(getPersonsUseCase),
             child: MaterialApp(
               title: 'Plant',
               debugShowCheckedModeBanner: false,

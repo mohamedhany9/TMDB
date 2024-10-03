@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tmdb/core/constants/app_constants.dart';
 import 'package:tmdb/core/styles/styles_manager.dart';
 import 'package:tmdb/core/utils/image_widget.dart';
 import 'package:tmdb/domain/entities/person.dart';
+import 'package:tmdb/presentation/screens/person_image_screen.dart';
 
 class PersonDetailsScreen extends StatefulWidget {
   Person person;
@@ -24,7 +26,14 @@ class _PersonDetailsScreenState extends State<PersonDetailsScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            PersonImageWidget(imageUrl: widget.person.profilepath),
+            GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PersonImageScreen(image:  widget.person.profilepath,)),
+                  );
+                },
+                child: PersonImageWidget(imageUrl: widget.person.profilepath)),
             const SizedBox(height: 20),
             _buildInfoRow("Name", widget.person.name),
             _buildInfoRow("Original Name", widget.person.original_name),

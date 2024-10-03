@@ -1,12 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb/core/constants/app_constants.dart';
 import 'package:tmdb/core/styles/styles_manager.dart';
-import 'package:tmdb/presentation/providers/plant_provider.dart';
+import 'package:tmdb/presentation/providers/person_provider.dart';
 import 'package:tmdb/presentation/screens/person_details_screen.dart';
 
 class PersonListScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _PersonListScreenState extends State<PersonListScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final plantProvider = Provider.of<PlantProvider>(context, listen: false);
+      final plantProvider = Provider.of<PersonProvider>(context, listen: false);
       plantProvider.refreshPersons();
     });
     _scrollController.addListener(_onScroll);
@@ -39,7 +40,7 @@ class _PersonListScreenState extends State<PersonListScreen> {
 
   void _onScroll() {
     if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-      final plantProvider = Provider.of<PlantProvider>(context, listen: false);
+      final plantProvider = Provider.of<PersonProvider>(context, listen: false);
       if (!plantProvider.isLoading && plantProvider.hasMore) {
         plantProvider.fetchPersons();
       }
@@ -52,7 +53,7 @@ class _PersonListScreenState extends State<PersonListScreen> {
       appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppConstants.horizontalPadding),
-        child: Consumer<PlantProvider>(
+        child: Consumer<PersonProvider>(
           builder: (context, plantProvider, child) {
             return ListView(
               controller: _scrollController,
@@ -71,7 +72,7 @@ class _PersonListScreenState extends State<PersonListScreen> {
     );
   }
 
-  Widget _buildPersonList(PlantProvider plantProvider) {
+  Widget _buildPersonList(PersonProvider plantProvider) {
     if (plantProvider.persons.isEmpty && !plantProvider.isLoading) {
       return const Center(child: Text(AppConstants.noPersonsFoundMessage));
     }

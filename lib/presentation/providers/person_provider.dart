@@ -3,10 +3,10 @@ import 'package:tmdb/domain/entities/person.dart';
 import 'package:tmdb/domain/usecases/get_persons.dart';
 
 
-class PlantProvider with ChangeNotifier {
+class PersonProvider with ChangeNotifier {
   final GetPersons getPersonsUseCase;
 
-  PlantProvider(this.getPersonsUseCase);
+  PersonProvider(this.getPersonsUseCase);
 
   final List<Person> _persons = [];
   bool _isLoading = false;
