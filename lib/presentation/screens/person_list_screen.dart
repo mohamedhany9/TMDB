@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:tmdb/core/constants/app_constants.dart';
 import 'package:tmdb/core/styles/styles_manager.dart';
 import 'package:tmdb/presentation/providers/plant_provider.dart';
+import 'package:tmdb/presentation/screens/person_details_screen.dart';
 
 class PersonListScreen extends StatefulWidget {
   const PersonListScreen({super.key});
@@ -80,10 +81,13 @@ class _PersonListScreenState extends State<PersonListScreen> {
       shrinkWrap: true,
       itemCount: plantProvider.persons.length,
       itemBuilder: (context, index) {
-        final plant = plantProvider.persons[index];
+        final person = plantProvider.persons[index];
         return GestureDetector(
           onTap: (){
-            // _navigateToPlantDetails(plant);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PersonDetailsScreen(person: person,)),
+            );
           },
           child: Container(
             margin: const EdgeInsets.only(bottom: 15),
@@ -99,7 +103,7 @@ class _PersonListScreenState extends State<PersonListScreen> {
                   height: 100.h,
                   width: 100.w,
                   fit: BoxFit.fill,
-                  imageUrl: 'https://image.tmdb.org/t/p/w185/${plant.profilepath}',
+                  imageUrl: 'https://image.tmdb.org/t/p/w185/${person.profilepath}',
                   placeholder: (context, url) => const SpinKitThreeBounce(
                     size: 30,
                     color: Colors.green,
@@ -120,7 +124,7 @@ class _PersonListScreenState extends State<PersonListScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildInfoRow(plant.name),
+                    _buildInfoRow(person.name),
 
                   ],
                 )

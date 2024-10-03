@@ -7,6 +7,9 @@ class PersonModel extends Person {
     required super.name,
     required super.id,
     required super.profilepath,
+    required super.popularity,
+    required super.known_for_department,
+    required super.original_name,
   });
 
   factory PersonModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +17,9 @@ class PersonModel extends Person {
       id: json['id'] ?? '',
       name: json['name'] ?? '',
       profilepath: json['profile_path'] ?? '',
+      popularity: json['popularity'] ?? '',
+      known_for_department: json['known_for_department'] ?? '',
+      original_name: json['original_name'] ?? '',
     );
   }
 
@@ -22,6 +28,10 @@ class PersonModel extends Person {
       'id': id,
       'name': name,
       'profile_path': profilepath,
+      'popularity': popularity,
+      'known_for_department': known_for_department,
+      'original_name': original_name,
+
 
     };
   }
