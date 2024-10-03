@@ -14,10 +14,10 @@ class PersonModel extends Person {
 
   factory PersonModel.fromJson(Map<String, dynamic> json) {
     return PersonModel(
-      id: json['id'] ?? '',
+      id: json['id'] ?? 0,
       name: json['name'] ?? '',
       profilepath: json['profile_path'] ?? '',
-      popularity: json['popularity'] ?? '',
+      popularity: json['popularity'] ?? 10.5,
       known_for_department: json['known_for_department'] ?? '',
       original_name: json['original_name'] ?? '',
     );
